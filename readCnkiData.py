@@ -50,6 +50,8 @@ def listProcess(article_list):
     preArticleYear = 9999
     #默认空缺值
     for article in article_list:
+        if article['yr'] == 2000:
+            print (article)
         if not article['yr']:
             article['yr'] = preArticleYear
             #填补空缺值
@@ -74,7 +76,7 @@ def getYears(article_list):
     return sorted_years
 
 def showArticleByYear(article_list):
-    #数据可视化
+    #数据可视化-历年载文折线图
     years = getYears(article_list)
     yl = [str(yr) for yr in years]
     #年份列表
@@ -130,11 +132,11 @@ def getJournal(article_list):
 
 def getKeyWordByPeriod(article_list):
 
-    firstPeriod = dict() #2001~2011
+    firstPeriod = dict() #2000~2011
     secondPeriod = dict() #2012～2018
     allPeriod = dict() #for all
     years = getYears(article_list)
-    periodList = [years[1:12],years[12:]]
+    periodList = [years[:12],years[12:]]
     for article in article_list:
         if article['yr'] in periodList[0]:
             #isFirstPeriod
@@ -212,11 +214,11 @@ def main():
     sorted_list = sortList(list)
     #把结果按年份排序
 
-    #showArticleByYear(sorted_list)
+    showArticleByYear(sorted_list)
     #jd = getJournal(list)
     #print(jd)
-    periodList,allPeriod = getKeyWordByPeriod(list)
 
+    periodList,allPeriod = getKeyWordByPeriod(list)
     showKeyWord(periodList)
 
     exit()
