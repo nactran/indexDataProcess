@@ -48,20 +48,15 @@ def readText(article_list):
     return article_list
 
 def wordMerge(word):
+
     if word == '教育领域':
         word = '教育'
     elif word == '教育资源库':
         word = '教育资源'
     elif word == '教学质量' or word == '教学评价' or word == '教育评价':
         word = '教学评估'
-    elif word == '教学模式' or word == '教学改革':
-        word = '教学'
-    elif word == '现代远程教育' or word == '网络教育' or word == '在线教育' or word == '远程开放教育'or word == '网络课程'or word == '网络教学':
-        word = '远程教育'
-    elif word == 'Web数据挖掘':
+    elif word == 'Web数据挖掘' or word =='Web日志挖掘' or word == 'Web日志':
         word = 'Web挖掘'
-    elif word == '个性化推荐' or word == '个性化教育' or word == '个性化教学' or word == '个性化服务' or word =='个性化学习系统' or word == '个性化学习':
-        word = '个性化'
     elif word == '高校':
         word = '高校教育'
     elif word == '高职教育'or word == '高职院校':
@@ -70,6 +65,8 @@ def wordMerge(word):
         word = '教育管理'
     elif word == '大数据时代' or word == '大数据技术' or word == '大数据挖掘':
         word = '大数据'
+    elif word == 'OLAP':
+        word = '联机分析处理'
     elif word == '教育决策支持系统' or word == '决策支持系统':
         word = '决策支持'
     elif word == '决策树算法':
@@ -82,6 +79,14 @@ def wordMerge(word):
         word = '学习行为'
     elif word == '自适应' or word =='自适应学习系统':
         word = '自适应学习'
+    elif word == '数据挖掘技术':
+        word = '数据挖掘'
+    elif word == '学习分析技术':
+        word = '学习分析'
+    elif word == '现代远程教育':
+        word = '远程教育'
+    elif word == '聚类':
+        word = '聚类分析'
     else:
         pass
     return word

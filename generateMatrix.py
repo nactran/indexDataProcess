@@ -8,8 +8,9 @@ import csv
 #################
 #Configurations
 #################
-#numOfFreqWord = 47
+numOfFreqWord = 53
 outPutPath = 'output/'
+
 #################
 #Methods
 #################
@@ -25,7 +26,7 @@ def countKeyWord():
     allPeriod = dict()
     for article in article_list:
         for kw in set(article['kw']):
-            if kw == '数据挖掘' or kw =='NoKeyword':
+            if kw == '数据挖掘' or kw == '教育' or kw =='NoKeyword':
                 continue
             else:
                 addWordIntoDict(kw,allPeriod)
@@ -48,12 +49,12 @@ def generateWordIndex(end = 48):
         count += 1
     return wordIndex
 
-def generateCoWordMatrix():
+def generateCoWordMatrix(length = 48):
     article_list = readCnikData()
-    word_list = generateWordList()
+    word_list = generateWordList(length)
     coWordMatrix = []
 
-    wordIndex = generateWordIndex()
+    wordIndex = generateWordIndex(length)
     #生成一个高频词对应下标的字典
 
     for i in range(0,len(wordIndex)):
@@ -93,23 +94,26 @@ def generateSimilarDifferentMatrix(coWordMatrix):
             differentMatrix[i].append(1-similarMatrix[i][j])
     return similarMatrix, differentMatrix
 
-def saveAsCsv(matrix,filename):
+def saveAsCsv(matrix,filename,rowName = []):
     csvfile = open(outPutPath+filename+'.csv','w',encoding='utf-8')
     writer = csv.writer(csvfile)
+    if(rowName):
+        writer.writerow(rowName)
     writer.writerows(matrix)
     csvfile.close()
 
 #############
 #Execute Script
 ##############
-'''
-cwm = generateCoWordMatrix()
-sm, dm= generateSimilarDifferentMatrix(cwm)
+if __name__ == '__main__':
+    wordList = generateWordList(numOfFreqWord)
+    cwm = generateCoWordMatrix(numOfFreqWord)
+    sm, dm= generateSimilarDifferentMatrix(cwm)
 
-saveAsCsv(sm,'similar')
-saveAsCsv(dm,'different')
+    saveAsCsv(sm,'similar',wordList)
+    saveAsCsv(dm,'different',wordList)
 
-'''
-wordIndex = generateWordIndex()
-print(wordIndex)
+
+    wordIndex = generateWordIndex(numOfFreqWord)
+    print(wordIndex)
 
