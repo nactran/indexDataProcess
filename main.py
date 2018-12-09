@@ -7,7 +7,7 @@ import math
 from sklearn.cluster import AgglomerativeClustering
 import numpy as np
 from config import outPutPath,stopWords,numOfFreqWord,minFreq,numOfClusters
-from utils import CnkiData
+from tools import CnkiData
 
 #################
 #Methods -Generate Matrix
